@@ -1,5 +1,5 @@
-name: "Setup Trymai Scala Project"
-description: "Setup Trymai Scala Project"
+name: "Setup Scala Project"
+description: "Setup Scala Project"
 inputs:
   artifacts-registry-realm:
     description: "artifacts-registry-realm"
@@ -11,13 +11,13 @@ inputs:
     description: "artifacts-registry-user"
     required: true
   artifacts-registry-password:
-    description: "e.g."
-    required: true
-  artifacts-registry-location:
     description: "artifacts-registry-password"
     required: true
+  artifacts-registry-location:
+    description: "artifacts-registry-location"
+    required: true
   sbt-plugins-path:
-    description: "e.g. ~/.sbt/1.0/plugins"
+    description: "sbt-plugins-path"
     required: true
     default: "sbt-plugins-path"
 runs:
