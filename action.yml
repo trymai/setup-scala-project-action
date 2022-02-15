@@ -1,0 +1,51 @@
+name: "Setup Trymai Scala Project"
+description: "Setup Trymai Scala Project"
+inputs:
+  artifacts-registry-realm:
+    description: "e.g. GitHub Package Registry"
+    required: true
+  artifacts-registry-host:
+    description: "e.g. maven.pkg.github.com"
+    required: true
+  artifacts-registry-user:
+    description: "e.g. _"
+    required: true
+  artifacts-registry-password:
+    description: "e.g. ${{ secrets.CI_TOKEN }}"
+    required: true
+  artifacts-registry-location:
+    description: "e.g. https://maven.pkg.github.com/trymai/_"
+    required: true
+  sbt-plugins-path:
+    description: "e.g. ~/.sbt/1.0/plugins"
+    required: true
+    default: "~/.sbt/1.0/plugins"
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout current branch
+      uses: actions/checkout@v2
+
+    - name: Setup Java and Scala
+      uses: olafurpg/setup-scala@v13
+      with:
+        java-version: "adopt@1.8"
+
+        - name: Cache sbt
+          uses: actions/cache@v2
+          with:
+            path: |
+              ~/.sbt
+              ~/.ivy2/cache
+              ~/.coursier/cache/v1
+              ~/.cache/coursier/v1
+              ~/AppData/Local/Coursier/Cache/v1
+              ~/Library/Caches/Coursier/v1
+            key: ${{ runner.os }}-sbt-cache-v2-${{ hashFiles('project/Library.scala') }}-${{ hashFiles('project/build.properties') }}
+
+    - name: Setup Resolvers
+      run: |
+        mkdir -p {{ inputs.sbt-plugins-path }}
+        echo 'resolvers += "${{ inputs.artifacts-registry-realm }}" at "${{ inputs.artifacts-registry-location }}"' > {{ inputs.sbt-plugins-path }}/resolvers.sbt
+        echo 'credentials += Credentials("${{ inputs.artifacts-registry-realm }}", "${{ inputs.artifacts-registry-host }}", "${{ inputs.artifacts-registry-user }}", "${{ inputs.artifacts-registry-password }}")' >> {{ inputs.sbt-plugins-path }}/resolvers.sbt
+      shell: bash
