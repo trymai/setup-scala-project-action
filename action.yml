@@ -45,7 +45,7 @@ runs:
 
     - name: Setup Resolvers
       run: |
-        mkdir -p {{ inputs.sbt-plugins-path }}
-        echo 'resolvers += "${{ inputs.artifacts-registry-realm }}" at "${{ inputs.artifacts-registry-location }}"' > {{ inputs.sbt-plugins-path }}/resolvers.sbt
-        echo 'credentials += Credentials("${{ inputs.artifacts-registry-realm }}", "${{ inputs.artifacts-registry-host }}", "${{ inputs.artifacts-registry-user }}", "${{ inputs.artifacts-registry-password }}")' >> {{ inputs.sbt-plugins-path }}/resolvers.sbt
+        mkdir -p ${{ inputs.sbt-plugins-path }}
+        echo 'resolvers += "${{ inputs.artifacts-registry-realm }}" at "${{ inputs.artifacts-registry-location }}"' > ${{ inputs.sbt-plugins-path }}/resolvers.sbt
+        echo 'credentials += Credentials("${{ inputs.artifacts-registry-realm }}", "${{ inputs.artifacts-registry-host }}", "${{ inputs.artifacts-registry-user }}", "${{ inputs.artifacts-registry-password }}")' >> ${{ inputs.sbt-plugins-path }}/resolvers.sbt
       shell: bash
