@@ -19,7 +19,7 @@ inputs:
   sbt-plugins-path:
     description: "sbt-plugins-path"
     required: true
-    default: "sbt-plugins-path"
+    default: "~/.sbt/1.0/plugins"
 runs:
   using: "composite"
   steps:
