@@ -29,7 +29,7 @@ runs:
     - name: Setup Java and Scala
       uses: olafurpg/setup-scala@v13
       with:
-        java-version: "adopt@1.8"
+        java-version: "adopt@1.11"
 
     - name: Cache sbt
       uses: actions/cache@v2
